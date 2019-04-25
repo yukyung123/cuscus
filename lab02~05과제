@@ -133,7 +133,7 @@ optimizer.apply_gradients(grads_and_vars=zip(grads,[W,b]))#grade 값을 minimize
 if step % 100 == 0:
 print("Iter: {}, Loss: {:.4f}".format(step, loss_fn(logistic_regression(features) ,labels))) #iter와 loss값이 줄어드는 것을 출력하기 위한 값
 def accuracy_fn(hypothesis, labels):#가설과 함수를 비교하기위함
-predicted = tf.cast(hypothesis > 0.5, dtype=tf.float32) #가설을 넣었을 때 
-accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, labels), dtype=tf.int32))#실제값과 예측값을 비교했을때 값이 맞는지 확인
+predicted = tf.cast(hypothesis > 0.5, dtype=tf.float32) #decision boundury를 결정하기 위한 구간, 시그모이드의 1과 0사이에 나온 0.5를 통해 예측된 값이 나오게 됨
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, labels), dtype=tf.int32))#실제값과 예측값을 비교했을때 값이 맞는지 accuracy를 출력하여 확인
 return accuracy
 test_acc = accuracy_fn(logistic_regression(x_test),y_test)#x테스트와 y테스트를 넣어 확인
